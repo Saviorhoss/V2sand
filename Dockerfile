@@ -1,8 +1,15 @@
 FROM nginx:mainline-alpine-slim
 
-USER root
-EXPOSE 80
 
+
+RUN apt update -y && apt install -y wget unzip nginx supervisor qrencode net-tools
+
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY nginx.conf /etc/nginx/nginx.conf
+
+RUN mkdir /etc/mysql /usr/local/mysql
+COPY config.json /etc/mysql/
+COPY entrypoint.sh /usr/local/mysql/
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY nginx.conf /etc/nginx/nginx.conf
