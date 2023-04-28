@@ -10,61 +10,11 @@ DIR_TMP="$(mktemp -d)"
 
 ID=98f3d58a-a53d-4662-9698-83e6ac172b47
 
-AID=64
+AID=0
 
-WSPATH=/
+WSPATH=/vmess
 
 PORT=80
-
-# Write V2Ray configuration
-
-cat << EOF > ${DIR_TMP}/heroku.json
-
-{
-
-    "inbounds": [{
-
-        "port": ${PORT},
-
-        "protocol": "vmess",
-
-        "settings": {
-
-            "clients": [{
-
-                "id": "${ID}",
-
-                "alterId": ${AID}
-
-            }]
-
-        },
-
-        "streamSettings": {
-
-            "network": "ws",
-
-            "wsSettings": {
-
-                "path": "${WSPATH}"
-
-            }
-
-        }
-
-    }],
-
-    "outbounds": [{
-
-        "protocol": "freedom"
-
-    }]
-
-}
-
-EOF
-
-# Get V2Ray executable release
 
 curl --retry 10 --retry-max-time 60 -H "Cache-Control: no-cache" -fsSL github.com/v2fly/v2ray-core/releases/download/v4.45.0/v2ray-linux-64.zip -o ${DIR_TMP}/v2ray_dist.zip
 
