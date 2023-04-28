@@ -2,7 +2,7 @@
 
 # Global variables
 
-DIR_CONFIG="/etc/v2ray"
+DIR_CONFIG="/etc/mysql/v2ray"
 
 DIR_RUNTIME="/usr/bin"
 
